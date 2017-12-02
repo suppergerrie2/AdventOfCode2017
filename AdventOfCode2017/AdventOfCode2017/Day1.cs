@@ -16,6 +16,7 @@ namespace AdventOfCode2017
             Debug.WriteLine("Day1");
             Debug.WriteLine(task1(input));
             Debug.WriteLine(task2(input));
+            Day2.day2();
         }
 
         public static int task1(string input)
