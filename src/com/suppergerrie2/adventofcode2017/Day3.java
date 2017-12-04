@@ -9,6 +9,7 @@ public class Day3 {
 	static String input = "325489";
 	
 	public static void main(String[] args) {
+		System.out.println("Day 3");
 		System.out.println(task1(input));
 		System.out.println(task2(input));
 	}
@@ -21,103 +22,93 @@ public class Day3 {
 		int x = 0;
 		int y = 0;
 		spiral.put(1,new Point(0,0));
-		String commands = "";
 		int i = 0;
 		int temp = 1;
 		while(temp<in) {
 			for(int right = 0; right <= i; right++) {
-				commands+="r";
 				temp++;
+				x++;
+				spiral.put(temp, new Point(x,y));
 			}
 			for(int up = 0; up <= i; up++) {
-				commands+="u";
 				temp++;
+				y++;
+				spiral.put(temp, new Point(x,y));
 			}			
 			for(int left = 0; left <= i+1; left++) {
-				commands+="l";
 				temp++;
+				x--;
+				spiral.put(temp, new Point(x,y));
 			}			
 			for(int down = 0; down <= i+1; down++) {
-				commands+="d";
 				temp++;
+				y--;
+				spiral.put(temp, new Point(x,y));
 			}
 			i+=2;
 		}
-		for(i = 0; i < commands.length(); i++) {
-			String command = commands.substring(i, i+1);
-			if(command.equals("u")) {
-				y++;
-			}
-			if(command.equals("d")) {
-				y--;
-			}
-			if(command.equals("r")) {
-				x++;
-			}
-			if(command.equals("l")) {
-				x--;
-			}
-			spiral.put(i+2, new Point(x,y));
-		}
-		System.out.println("\n" + commands);
 		
 		Point loc = spiral.get(in);
 		
 		return Math.abs(loc.x)+Math.abs(loc.y);
 	}
 	
+	static Map<Point, Integer> spiral = new HashMap<Point, Integer>();
 	static int task2(String _in) {
 		int in = Integer.parseInt(_in);
 		
-		Map<Point, Integer> spiral = new HashMap<Point, Integer>();
 		int x = 0;
 		int y = 0;
 		spiral.put(new Point(0,0),1);
-		String commands = "";
 		int i = 0;
 		int temp = 1;
 		while(temp<in) {
 			for(int right = 0; right <= i; right++) {
-				commands+="r";
 				temp++;
+				x++;
+				int val = putInSpiral(x,y,in);
+				if(val>0) {
+					return val;
+				}
 			}
 			for(int up = 0; up <= i; up++) {
-				commands+="u";
 				temp++;
+				y++;
+				int val = putInSpiral(x,y,in);
+				if(val>0) {
+					return val;
+				}
 			}			
 			for(int left = 0; left <= i+1; left++) {
-				commands+="l";
 				temp++;
+				x--;
+				int val = putInSpiral(x,y,in);
+				if(val>0) {
+					return val;
+				}
 			}			
 			for(int down = 0; down <= i+1; down++) {
-				commands+="d";
 				temp++;
+				y--;
+				int val = putInSpiral(x,y,in);
+				if(val>0) {
+					return val;
+				}
 			}
 			i+=2;
 		}
-		for(i = 0; i < commands.length(); i++) {
-			String command = commands.substring(i, i+1);
-			if(command.equals("u")) {
-				y++;
-			}
-			if(command.equals("d")) {
-				y--;
-			}
-			if(command.equals("r")) {
-				x++;
-			}
-			if(command.equals("l")) {
-				x--;
-			}
-			int val = calculateValue(x, y, spiral);
-			
-			if(val>in) {
-				return val;
-			}
-			
-			spiral.put(new Point(x,y), val);
-		}
 		return 0;
+	}
+	
+	static int putInSpiral(int x, int y, int in) {
+		int val = calculateValue(x, y, spiral);
+		
+		if(val>in) {
+			return val;
+		}
+		
+		spiral.put(new Point(x,y), val);
+		return -1;
 	}
 
 	private static int calculateValue(int x, int y, Map<Point, Integer> spiral) {
