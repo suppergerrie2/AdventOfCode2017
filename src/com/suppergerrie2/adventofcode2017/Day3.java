@@ -4,12 +4,15 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.suppergerrie2.adventofcodehelper.Helper;
+
 public class Day3 {
 	
-	static String input = "325489";
+	static String input;
 	
 	public static void main(String[] args) {
 		System.out.println("Day 3");
+		input = Helper.loadFile("day3");
 		System.out.println(task1(input));
 		System.out.println(task2(input));
 	}
