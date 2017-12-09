@@ -71,7 +71,7 @@ public class Day6 {
 		int cycles = 0;
 		int foundAt = 0;
 		String found = "";
-		boolean foundLoop = false;
+//		boolean foundLoop = false;
 		boolean foundSecondLoop = false;
 		
 		String[] banksS = in.split("	");
@@ -86,7 +86,7 @@ public class Day6 {
 				config+=banks[i]+"|";
 			}
 			if(configs.contains(config)) {
-				foundLoop=true;
+//				foundLoop=true;
 				if(config.equals(found)) {
 					foundSecondLoop=true;
 					break;
