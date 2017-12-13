@@ -34,7 +34,6 @@ public class Day11 {
 	}
 
 	static void task12(String in) {
-		int dist = 0;
 		int maxDist = Integer.MIN_VALUE;
 		int x = 0, y = 0, z = 0;
 		
